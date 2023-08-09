@@ -1,360 +1,610 @@
-/**
- * Some style elements borrowed from the QWebIRC project
- * http://qwebirc.org/
- */
+:root {
+    /* Light Mode */
+    --primary-color-light: #262b2c;
+    --secondary-color-light: #15191a;
+    --header-color-light: #1b1f20;
+    --text-background-color-light: #1b1f20;
+    --element-borders-light: #262b2c;
+    
+    --normal-text-color-light: #ffffFF;
+    --tab-text-color-light: #ffffff;
+    --visited-text-color-light: #12c0ff;
+    --inverse-text-color-light: #222222;
+    
+    --textarea-background-color-light: #555555;
+    --textarea-background-hover-color-light: #888888;
+    --textarea-focused-color-light: #FFFFFF;
+    
+    --paginator-bar-background-color-light: #303337;
+    --paginator-button-background-color-light: #363b3c;
+
+    /* Dark Mode */
+    --primary-color-dark: #8C9FAD;
+    --secondary-color-dark: #121212;
+    --header-color-dark: #FFFFFF;
+    --element-borders-dark: #333333;
+
+    /* Initial Theme: Light Mode */
+    --primary-color: var(--primary-color-light);
+    --secondary-color: var(--secondary-color-light);
+    --header-color: var(--header-color-light);
+    --text-background-color: var(--footer-color-light);
+    --element-borders: var(--element-borders-light);
+    
+    --normal-text-color: var(--normal-text-color-light);
+    --tab-text-color: var(--tab-text-color-light);
+    --visited-text-color: var(--visited-text-color-light);
+    --inverse-text-color: var(--inverse-text-color-light);
+    
+    --textarea-background-color: var(--textarea-background-color-light);
+    --textarea-background-hover-color: var(--textarea-background-hover-color-light);
+    --textarea-focused-color: var(--textarea-focused-color-light);
+    --paginator-bar-background-color: var(--paginator-bar-background-color-light);
+    --paginator-button-background-color: var(--paginator-button-background-color-light);
+}
 
 BODY {
-	background: #F0F7FF;
-	font-family: sans-serif;
-	font-size: 14px;
-	margin: 0;
+    background: var(--secondary-color);
+    color: var(--normal-text-color); /* Dark color for light theme, light color for dark theme */
+    font-family: sans-serif;
+    font-size: 14px;
+    margin: 0;
+    transition: background-color 0.3s, color 0.3s;
 }
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-3                            menu bar                            *
-* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-.menu {
-	border-bottom: 1px solid #C3D2E0;
-	margin-top: 0;
-	margin-bottom: 0;
-	padding: 4px;
-	background: #E3EFFA;
-}
-a.tab, a.tab:visited {
-	color:#000000;
-	text-decoration:none;
-}
-a.tab:hover, a.tab:active, .tab-selected {
-	color:#000000;
-	background-color:#FFFFFE;
-	text-decoration:none;
-}
-.tab, .tab-selected, .tframe, #tips {
-	-moz-border-radius:4px;
-	-webkit-border-radius:4px;
-	border:1px solid #C8D1DB;
-	cursor:default;
-	margin-right:2px;
-	padding:2px;
-	break-inside: avoid;
-}
-.tframe {
-	margin:4px;
+
+BODY.dark-mode {
+    --primary-color: var(--primary-color-dark);
+    --primary-color: var(--primary-color-dark);
+    --secondary-color: var(--secondary-color-dark);
+    --header-color: var(--header-color-dark);
+    --text-background-color: var(--footer-color-dark);
+    --element-borders: var(--element-borders-dark);
+    
+    --normal-text-color: var(--normal-text-color-dark);
+    --tab-text-color: var(--tab-text-color-dark);
+    --visited-text-color: var(--visited-text-color-dark);
+    --inverse-text-color: var(--inverse-text-color-dark);
+    
+    --textarea-background-color: var(--textarea-background-color-dark);
+    --textarea-background-hover-color: var(--textarea-background-hover-color-dark);
+    --textarea-focused-color: var(--textarea-focused-color-dark);
+    
+    --paginator-bar-background-color: var(--paginator-bar-background-color-dark);
+    --paginator-button-background-color: var(--paginator-button-background-color-dark);
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-3                        secondary bars                          *
-* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-.sbar {
-	border-bottom: 1px solid #C3D2E0;
-	margin-top: 0;
-	margin-bottom: 16px;
-	padding: 4px;
-	background: #CEDFF0;
-	text-align: left;
+  3                            menu bar                            *
+  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+.menu {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    background-color: var(--header-color);
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
-.sfoot {
-	border-top: 1px solid #C3D2E0;
-	margin-top: 0;
-	margin-bottom: 0;
-	padding: 4px;
-	background: #CEDFF0;
-	text-align: center;
+
+.menu b {
+    margin-left: 20px;
+    margin-right: 20px;
+    font-size: 18px;
 }
-.navside, #comment-list-recent .blockbody {
-	background:none repeat scroll 0 0 #CEDFF0;
-	padding:4px;
-	font-size:85%;
-	border:1px solid #C3D2E0;
-	margin-bottom:5px;
-	-moz-border-radius:4px;
-	-webkit-border-radius:4px;
+
+.menu a.tab,
+.menu a.tab:visited {
+    font-weight: bold;
+    color: var(--tab-text-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
 }
-.navside.navtop, .shm-image-list, #Statsmain {
-	text-align:left;
+
+.menu a.tab:hover,.menu a.tab:active {
+    background-color: var(--secondary-color);
+    color: var(--tab-text-color);
+    text-decoration: none;
+    transition: background-color 0.3s ease;
 }
-.shm-image-list {
-	margin-top: 10px;
+
+.tab-selected {
+    background-color: var(--secondary-color);
+    color: var(--tab-text-color);
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+
+    border: 2px solid var(--secondary-color);
+    padding-top: 10px;
+    padding-right: 15px;
+    padding-bottom: 10px;
+    padding-left: 15px;
+    border-radius: 5px;
 }
-.lazy{
-	background:none repeat scroll 0 0 #CEDFF0;
-	padding:4px;
-	border:1px solid #C3D2E0;
-	margin:5px;
-	-moz-border-radius:4px;
-	-webkit-border-radius:4px;
+
+.menu .tab,
+.menu .tab-selected,
+.menu .tframe,
+#tips {
+    border-radius: 4px;
+    border: 1px solid var(--element-borders);
+    padding: 6px;
+    margin-right: 8px;
+    cursor: pointer;
+    break-inside: avoid;
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 }
-.navtop, .maintop {
-	font-size:110%;
-	border-bottom:0 none;
-	margin:0 0 2px 0; /* top right bottom left */
-	padding:2px 10px;
-	position:relative;
-	left:0;
-	width:50%;
+
+.menu .tframe {
+    margin: 4px;
 }
-.navtop {
-	top:7px;
-}
-.maintop {
-	top:0;
-	margin-top:5px;
-	margin-bottom:5px;
-}
-#tips, #blotter1, #blotter2 {
-	margin-right:16px;
-	margin-left:16px;
-}
+
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-3                  things common to all pages                    *
-* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-H1 A {
-	color: black;
+  3                        secondary bars                          *
+  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/* General Styles */
+.sbar {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Adjust this value for desired spacing */
+    border: 1px solid var(--element-borders);
+    margin: 0;
+    padding: 8px;
+    background: var(--primary-color);
+    font-size: 85%;
+    border-radius: 4px;
 }
-A, A:hover, A:active, A:visited {
-	color: #2860AD;
+
+.sbar > *:last-child {
+    margin-right: 0; /* Reset margin for the last item */
+}
+
+.sbar:last-child {
+    border-bottom: none;
+    text-align: left;
+}
+
+.sfoot {
+    border-top: none;
+    text-align: center;
+}
+
+.shm-image-list {
+    margin-top: 10px;
+}
+
+.navside, #comment-list-recent .blockbody, .lazy {
+    background: var(--primary-color);
+    padding: 8px;
+    border: 1px solid var(--element-borders);
+    margin: 10px 0;
+    border-radius: 4px;
+    font-size: 85%;
+}
+
+.navside.navtop, .shm-image-list, #Statsmain {
+    text-align: left;
+}
+
+/* Top Navigation */
+.navtop, .maintop {
+    font-size: 110%;
+    margin: 10px 0;
+    padding: 10px;
+    position: relative;
+    width: 50%;
+}
+
+.navtop {
+    top: 12px;
+}
+
+/* Specific Elements */
+#tips, #blotter1, #blotter2 {
+    margin: 0 16px;
+}
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+  3                  things common to all pages                    *
+  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+H1 A {
+    color: var(--normal-text-color);
+}
+A,
+A:hover,
+A:active,
+A:visited {
+    color: var(--visited-text-color);
 }
 H3 {
-	text-align: center;
-	margin: 0;
+    text-align: left;
+    margin: 0;
 }
 THEAD {
-	font-weight: bold;
+    font-weight: bold;
 }
 TD {
-	vertical-align: top;
-	text-align: left;
+    vertical-align: baseline;
+    text-align: left;
 }
 CODE {
-	background: #DEDEDE;
-	font-size: 0.8em;
+    background: #dedede;
+    font-size: 0.8em;
 }
 #subtitle {
-	width: 256px;
-	font-size: 0.75em;
-	margin: -16px auto auto;
-	text-align: center;
-	border: 1px solid black;
-	border-top: none;
-	background: #DDD;
+    width: 256px;
+    font-size: 0.75em;
+    margin: -16px auto auto;
+    text-align: center;
+    border: 1px solid black;
+    border-top: none;
+    background: #ddd;
 }
 
-TABLE.zebra {border-spacing: 0; border: 2px solid #C3D2E0;}
-TABLE.zebra TD, TABLE.zebra TH {vertical-align: middle; padding: 4px;}
-TABLE.zebra THEAD TD, TABLE.zebra THEAD TH {border-bottom: 2px solid #C3D2E0;}
-TABLE.zebra TFOOT TD, TABLE.zebra TFOOT TH {border-top: 2px solid #C3D2E0;}
-TABLE.zebra TR TD {border-bottom: 1px solid #C3D2E0;}
-TABLE.zebra TR:nth-child(odd) {background: #CEDFF0;}
-TABLE.zebra TR:nth-child(even) {background: #F0F7FF;}
-TABLE.image_info {margin: auto;}
-
-INPUT, TEXTAREA, button {
-	-moz-border-radius:4px;
-	-webkit-border-radius:4px;
-	border:1px solid #C8D1DB;
-	cursor:default;
-	margin-right:2px;
-	padding:2px;
+TABLE.zebra {
+    border-collapse: collapse;
+    border: 2px solid var(--element-borders);
+    width: 100%;
 }
 
-INPUT:hover, button:hover, TEXTAREA:hover {
-	background-color:#FFFFFF;
-	text-decoration:none;
+TABLE.zebra TD,
+TABLE.zebra TH {
+    padding: 8px;
+    text-align: left;
+    vertical-align: middle;
+}
+
+TABLE.zebra THEAD TD,
+TABLE.zebra THEAD TH {
+    border-bottom: 2px solid var(--element-borders);
+    background-color: var(--primary-color);
+    color: white;
+}
+
+TABLE.zebra TFOOT TD,
+TABLE.zebra TFOOT TH {
+    border-top: 2px solid var(--element-borders);
+    background-color: var(--primary-color);
+    color: white;
+}
+
+TABLE.zebra TR:nth-child(odd) {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+TABLE.zebra TR:nth-child(even) {
+    background-color: var(--secondary-color);
+}
+TABLE.image_info {
+    margin: auto;
+    width: 100%;
+}
+
+TABLE.image_info TD {
+    padding: 8px;
+    text-align: left;
+    vertical-align: middle;
+}
+TABLE.tag_list {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+TABLE.tag_list TBODY TD {
+    padding: 4px;
+    line-height: 1.2;
+}
+
+TABLE.tag_list > THEAD {
+    display: none;
+}
+
+TABLE.tag_list TBODY TD:after {
+    content: " ";
+}
+
+TABLE.form {width: 300px;}
+TABLE.form TD, TABLE.form TH {vertical-align: middle;}
+TABLE.form TBODY TD {text-align: left;}
+TABLE.form TBODY TH {text-align: right; padding-right: 4px; width: 1%; white-space: nowrap;}
+TABLE.form TD + TH {padding-left: 8px;}
+
+FORM {
+    margin: 0;
+    color: var(--normal-text-color);
+}
+
+large_upload_form INPUT.wid {
+	width: 100%;
+}
+
+INPUT,BUTTON,TEXTAREA {
+    background-color: var(--textarea-background-color);
+    border-radius: 4px;
+    border: 1px solid var(--element-borders);
+    cursor: pointer;
+    margin-right: 12px; /* Adjusted margin */
+    padding: 8px;
+    margin-top: 2px;
+    transition: background-color 0.3s, text-decoration 0.3s;
+    color: var(--normal-text-color);
+}
+
+.form {
+    color: var(--normal-text-color) !important;
+}
+
+INPUT[type=text]:focus, TEXTAREA:focus {
+    background-color: var(--textarea-focused-color) !important;
+    color: var(--inverse-text-color) !important;
+}
+
+INPUT[type=file] {
+    color: var(--normal-text-color) !important;
+}
+
+INPUT[type=submit] {
+    color: var(--normal-text-color);
+    background-color: var(--secondary-color);
+    border-radius: 4px;
+    border: 1px solid var(--element-borders);
+    cursor: pointer;
+    margin-right: 12px; /* Adjusted margin */
+    padding: 8px;
+    margin-top: 4px;
+    transition: background-color 0.3s, text-decoration 0.3s;
+}
+
+INPUT:hover,
+button:hover,
+TEXTAREA:hover {
+    background-color: var(--textarea-background-hover-color);
+    text-decoration: underline wavy;
 }
 
 FOOTER {
-	clear: both;
-	padding: 8px;
-	font-size: 0.7em;
-	text-align: center;
-	border-top: 1px solid #C3D2E0;
-	background: #E3EFFA;
+    clear: both;
+    padding: 8px;
+    font-size: 0.7em;
+    text-align: center;
+    border-top: 1px solid var(--element-borders);
+    background: var(--text-background-color);
 }
 
-A {text-decoration: none;}
-A:hover {text-decoration: underline;}
+A {
+    text-decoration: none;
+}
+A:hover {
+    text-decoration: underline;
+}
 
 BLOCKQUOTE {
-	border: 1px solid #C3D2E0;
-	padding: 8px;
-	background: #E3EFFA;
+    border: 1px solid var(--element-borders);
+    padding: 8px;
+    background: var(--text-background-color);
 }
 
 UL {
-	text-align: left;
+    text-align: left;
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-*             the navigation bar, and all its blocks             *
-* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+  *             the navigation bar, and all its blocks             *
+  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 NAV {
-	width: 200px;
-	float: left;
-	text-align: center;
-	margin-left: 16px;
+    width: 200px;
+    float: left;
+    text-align: center;
+    margin-left: px;
 }
 NAV .blockbody {
-	font-size: 0.85em;
-	text-align: center;
+    font-size: 0.85em;
+    text-align: center;
 }
 NAV TABLE {
-	width: 190px;
+    width: 190px;
 }
 NAV TD {
-	vertical-align: middle;
+    vertical-align: baseline;
 }
-NAV INPUT, nav button {
-	width: 95%;
-	padding: 0;
+NAV INPUT,
+nav button {
+    width: 95%;
+    padding: 0;
 }
 NAV SELECT {
-	width: 100%;
-	padding: 0;
+    width: 100%;
+    padding: 0;
+}
+
+.command_example {
+    margin: 12pt;
+    padding: 16pt;
+    display: flex;
+    flex-direction: column;
+}
+  
+.command_example pre {
+    padding: 8pt;
+    border: 3px dashed var(--secondary-color);
+    flex: 1;
+    min-width: 256px;
+}
+  
+.command_example p {
+    padding-left: 16pt;
+    align-self: center;
+}
+  
+@media (min-width: 750px) {
+    .command_example {
+        flex-direction: row;
+    }
+  
+    .command_example pre {
+        flex: none;
+        width: 256px;
+        min-width: auto;
+    }
 }
 
 #comments P {
-	text-align: left;
-	width: 150px;
-	max-width: 150px;
-	overflow: hidden;
-}
-.comment {
-	text-align: left;
+    text-align: left;
+    width: 150px;
+    max-width: 150px;
+    overflow: scroll;
 }
 
-TABLE.tag_list {
-	border-collapse: collapse;
+.comment {
+    text-align: left;
+    position: relative;
+    word-wrap: break-word;
+    margin-bottom: 5px;
+    padding: 8px;
+    border: 1px solid var(--element-borders);
+    background-color: var(--secondary-color);
+    border-radius: 4px;
 }
-TABLE.tag_list>THEAD {
-	display: none;
+
+.comment img {
+    max-width: 100%;
 }
-TABLE.tag_list>TBODY>TR>TD {
-	display: inline;
-	padding: 0;
-	line-height: 1em;
+
+.comment .info {
+    display: none;
+    text-align: center;
+    padding: 8px;
+    background: var(--header-color);
+    border: 1px solid var(--element-borders);
+    position: absolute;
+    top: -0px;
+    right: -8px;
+    width: 180px;
+    z-index: 1;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
 }
-TABLE.tag_list>TBODY>TR>TD:after {
-	content: " ";
+
+.comment:hover .info {
+    display: block;
 }
 
 .more:after {
-	content: " >>>";
+    content: " >>>";
 }
 
 .tag_count:before {
-	content: "(";
+    content: "(";
 }
 .tag_count:after {
-	content: ")";
+    content: ")";
 }
 
 .paginator {
 	padding: 4px;
-	border-right: 1px solid #C3D2E0;
-	border-left: 1px solid #C3D2E0;
-}
-.paginator A {
-	-moz-border-radius:4px;
-	-webkit-border-radius:4px;
-	color: #000;
-	border:1px solid #C8D1DB;
-	cursor:default;
-	margin-right:2px;
-	padding:2px;
-}
-.paginator A:hover {
-	background-color:#FFFFFF;
-	text-decoration:none;
+    
+    background-color: var(--paginator-bar-background-color)
 }
 
+.paginator A {
+    background-color: var(--paginator-button-background-color);
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	color: var(--tab-text-color);
+	border: 2px solid var(--element-borders);
+	cursor: default;
+	margin-right: 2px;
+    margin-left: 2px;
+	padding: 2px;
+}
+
+.paginator A:hover {
+	background-color: var(--primary-color);
+	text-decoration: none;
+}
+
+
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-*                 the main part of each page                     *
-* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+  *                 the main part of each page                     *
+  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 ARTICLE {
-	margin-left: 226px;
-	margin-right: 16px;
-	text-align: center;
-	height: 1%;
+    margin-left: 226px;
+    margin-right: 16px;
+    text-align: left;
+    height: 1%;
 }
 ARTICLE.body_noleft {
-	margin-left: 4px;
-	margin-right: 16px;
-	margin-bottom:16px;
-	padding-left:4px;
-	padding-right:4px;
-	text-align: left;
-	height: 1%;
+    margin-left: 4px;
+    margin-right: 16px;
+    margin-bottom: 16px;
+    padding-left: 4px;
+    padding-right: 4px;
+    text-align: left;
+    height: 1%;
 }
 ARTICLE TABLE {
-	width: 90%;
+    width: 90%;
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-*                     specific page types                        *
-* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+  *                     specific page types                        *
+  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 #pagelist {
-	margin-top: 32px;
+    margin-top: 32px;
 }
-
-/*.rr {text-align: left; background: #E3EFFA; margin: 8px;}
-.rrtop     {background: url("circle-tl.png") no-repeat top left;}
-.rrtop div {background: url("circle-tr.png") no-repeat top right;}
-.rrbot     {background: url("circle-bl.png") no-repeat bottom left;}
-.rrbot div {background: url("circle-br.png") no-repeat bottom right;}
-.rrtop, .rrtop div, .rrbot, .rrbot div {height: 8px; width: 100%;}
-.rrcontent {margin: 0px 8px; text-align: left;}
-
-.hrr {text-align: left; background: #C3D2E0; margin: 8px;}
-.hrrtop     {background: url("circle-tl.png") no-repeat top left;}
-.hrrtop div {background: url("circle-tr.png") no-repeat top right;}
-.hrrbot     {background: url("circle-bl.png") no-repeat bottom left;}
-.hrrbot div {background: url("circle-br.png") no-repeat bottom right;}
-.hrrtop, .hrrtop div, .hrrbot, .hrrbot div {height: 8px; width: 100%;}
-.hrrcontent {margin: 0px 8px;}*/
 
 .setupblock {
-	text-align: center;
-	width: 350px;
+    text-align: center;
+    width: 350px;
 }
 .setupblock TEXTAREA {
-	width: 300px;
-	font-size: 0.75em;
+    width: 300px;
+    font-size: 0.75em;
 }
 
 .helpable {
-	border-bottom: 1px dashed gray;
+    border-bottom: 1px dashed gray;
 }
 
 .ok {
-	background: #AFA;
+    background: #afa;
 }
 .bad {
-	background: #FAA;
+    background: #faa;
 }
 
 NAV .thumbblock {
-	float: none;
-	height: auto;
+    float: none;
+    height: auto;
 }
 NAV .thumb {
-	margin-bottom: 0;
+    margin-bottom: 0;
 }
 .shm-thumb {
-	width: 200px;
-	display: inline-block;
+    width: 200px;
+    display: inline-block;
 }
 .thumb {
-	display: inline-block;
-	text-align: center;
-	margin-bottom: 32px;
+    display: inline-block;
+    text-align: center;
+    margin-bottom: 32px;
 }
 
-.tooltip{
-   position:absolute;
-   top:0;
-   left:0;
-   z-index:3;
-   display:none;
+.tooltip {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 3;
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    .sidebar {
+        display: none;
+    }
 }
